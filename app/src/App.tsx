@@ -4,6 +4,7 @@ import UserCard from "./components/UserCard";
 import UserInterface from "./interfaces/UserInterface";
 import AddUserModal from "./components/AddUserModal";
 import { AnimatePresence } from "framer-motion";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   const [users, setUsers] = useState<UserInterface[]>([]);
@@ -25,8 +26,11 @@ function App() {
 
   return (
     <div className="h-screen text-white font-circular">
+      <Toaster />
       <AnimatePresence mode="wait">
-        {showModal && <AddUserModal setShowModal={setShowModal} />}
+        {showModal && (
+          <AddUserModal setUsers={setUsers} setShowModal={setShowModal} />
+        )}
       </AnimatePresence>
       <Navbar setShowModal={setShowModal} />
       {users

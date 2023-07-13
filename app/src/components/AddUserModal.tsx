@@ -1,6 +1,17 @@
-import React from "react";
+import React, { useRef } from "react";
 import { motion } from "framer-motion";
 import { ReactComponent as Formclose } from "../assets/form-close.svg";
+import UserInterface from "../interfaces/UserInterface";
+import toast from "react-hot-toast";
+
+/*
+    NOTE: 
+
+    - We're using useRef instead of useState on form inputs because 
+    we don't need real-time validation on the form (only on submission). 
+    It's also a good way to eliminate unnecessary re-renders.
+
+*/
 
 const backdrop = {
   visible: { opacity: 1 },
@@ -31,11 +42,47 @@ const modal = {
 };
 
 interface AddUserModalProps {
-  setShowModal: (showModal: boolean) => void;
+  setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
+  setUsers: React.Dispatch<React.SetStateAction<UserInterface[]>>;
 }
 
 function AddUserModal(props: AddUserModalProps) {
-  const { setShowModal } = props;
+  const { setShowModal, setUsers } = props;
+  const nameRef = useRef<HTMLInputElement>(null);
+  const dobRef = useRef<HTMLInputElement>(null);
+  const phoneRef = useRef<HTMLInputElement>(null);
+  const emailRef = useRef<HTMLInputElement>(null);
+
+  function addUser() {
+    if (
+      nameRef.current?.value !== "" &&
+      dobRef.current?.value !== "" &&
+      phoneRef.current?.value !== "" &&
+      emailRef.current?.value !== ""
+    ) {
+      // if a user uses dashes in dob, remove and replace
+      const date = new Date(dobRef.current!.value);
+      const formattedDate = `${
+        date.getMonth() + 1
+      }/${date.getDate()}/${date.getFullYear()}`;
+
+      setUsers((prevUsers: UserInterface[]) => [
+        ...prevUsers,
+        {
+          id: prevUsers.length + 1,
+          name: nameRef.current!.value,
+          dob: formattedDate,
+          phone: phoneRef.current!.value,
+          email: emailRef.current!.value,
+          signature: null,
+        },
+      ]);
+      setShowModal(false);
+      toast.success("User added!");
+    } else {
+      toast.error("Please fill out all fields.");
+    }
+  }
 
   return (
     <motion.div
@@ -63,6 +110,7 @@ function AddUserModal(props: AddUserModalProps) {
             Name
           </label>
           <input
+            ref={nameRef}
             className="text-[#D1D4DC] pl-2 bg-[#0A0C13] rounded-[4px] w-[350px] py-1 border-solid border-[#50535E] border-[1px]"
             type="text"
             name="name"
@@ -72,8 +120,9 @@ function AddUserModal(props: AddUserModalProps) {
             Date of Birth
           </label>
           <input
+            ref={dobRef}
             className="text-[#D1D4DC] pl-2 bg-[#0A0C13] rounded-[4px] w-[350px] py-1 border-solid border-[#50535E] border-[1px]"
-            type="date"
+            type="text"
             name="dob"
             placeholder="Date of Birth"
           ></input>
@@ -81,6 +130,7 @@ function AddUserModal(props: AddUserModalProps) {
             Phone
           </label>
           <input
+            ref={phoneRef}
             className="text-[#D1D4DC] pl-2 bg-[#0A0C13] rounded-[4px] w-[350px] py-1 border-solid border-[#50535E] border-[1px]"
             type="tel"
             name="phone"
@@ -90,6 +140,7 @@ function AddUserModal(props: AddUserModalProps) {
             Email
           </label>
           <input
+            ref={emailRef}
             className="text-[#D1D4DC] pl-2 bg-[#0A0C13] rounded-[4px] w-[350px] py-1 border-solid border-[#50535E] border-[1px]"
             type="email"
             name="email"
@@ -98,7 +149,10 @@ function AddUserModal(props: AddUserModalProps) {
         </form>
         <div className="flex items-center justify-end gap-5 pt-2">
           <button className="text-ritten-blue">Cancel</button>
-          <button className="bg-ritten-blue py-2 px-5 rounded-[6px] text-black shadow-user-shadow">
+          <button
+            onClick={addUser}
+            className="bg-ritten-blue py-2 px-5 rounded-[6px] text-black shadow-user-shadow"
+          >
             Add User
           </button>
         </div>
