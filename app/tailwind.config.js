@@ -8,6 +8,7 @@ module.exports = {
     extend: {
       colors: {
         "ritten-blue": "var(--ritten-blue)",
+        "modal-bg": "var(--modal-bg)",
       },
       fontFamily: {
         circular: ["circular", ...defaultTheme.fontFamily.sans],
@@ -18,5 +19,32 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    function ({ addUtilities }) {
+      addUtilities(
+        {
+          ".remove-icon": {
+            "::-webkit-calendar-picker-indicator": {
+              display: "none",
+            },
+          },
+        },
+        ["responsive", "hover"]
+      );
+    },
+  ],
+  plugins: [
+    function ({ addUtilities }) {
+      addUtilities(
+        {
+          ".remove-icon": {
+            "::-webkit-calendar-picker-indicator": {
+              display: "none",
+            },
+          },
+        },
+        ["responsive", "hover"]
+      );
+    },
+  ],
 };

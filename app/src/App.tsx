@@ -3,6 +3,7 @@ import Navbar from "./components/Navbar";
 import UserCard from "./components/UserCard";
 import UserInterface from "./interfaces/UserInterface";
 import AddUserModal from "./components/AddUserModal";
+import { AnimatePresence } from "framer-motion";
 
 function App() {
   const [users, setUsers] = useState<UserInterface[]>([]);
@@ -24,7 +25,9 @@ function App() {
 
   return (
     <div className="h-screen text-white font-circular">
-      {showModal && <AddUserModal />}
+      <AnimatePresence mode="wait">
+        {showModal && <AddUserModal setShowModal={setShowModal} />}
+      </AnimatePresence>
       <Navbar setShowModal={setShowModal} />
       {users
         ? users.map((user) => <UserCard key={user.id} user={user} />)

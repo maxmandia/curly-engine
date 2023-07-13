@@ -16,10 +16,29 @@
   font-style: normal;
 }
 
+/* custom colors to use with Tailwind CSS */
 :root {
   --ritten-blue: #1890ff;
+  --modal-bg: rgba(51, 51, 51, 0.7);
 }
 
+/* removes the date picker icon when adding a user's DOB */
+input[type="date"]::-webkit-inner-spin-button,
+input[type="date"]::-webkit-calendar-picker-indicator {
+  display: none;
+  -webkit-appearance: none;
+}
+
+/* removes default autofill styles on form inputs */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: #ffffff;
+  transition: background-color 5000s ease-in-out 0s;
+  box-shadow: inset 0 0 20px 20px #0a0c13;
+}
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",

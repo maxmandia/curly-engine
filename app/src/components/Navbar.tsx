@@ -21,7 +21,7 @@ function Navbar(props: NavbarProps) {
         </div>
         <div className="flex items-center gap-2">
           <h5>Filter By:</h5>
-          <button className="text-ritten-blue">All users</button>
+          <button className="text-ritten-blue">All Users</button>
         </div>
       </div>
     </nav>
