@@ -96,6 +96,12 @@ function AddUserModal(props: AddUserModalProps) {
             placeholder="Email"
           ></input>
         </form>
+        <div className="flex items-center justify-end gap-5 pt-2">
+          <button className="text-ritten-blue">Cancel</button>
+          <button className="bg-ritten-blue py-2 px-5 rounded-[6px] text-black shadow-user-shadow">
+            Add User
+          </button>
+        </div>
       </motion.div>
     </motion.div>
   );

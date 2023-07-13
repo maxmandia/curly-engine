@@ -6,6 +6,9 @@ module.exports = {
   content: ["./src/**/*.{html,js,tsx}"],
   theme: {
     extend: {
+      boxShadow: {
+        "user-shadow": "0px 1px 8px 0px rgba(213, 213, 213, 0.50)",
+      },
       colors: {
         "ritten-blue": "var(--ritten-blue)",
         "modal-bg": "var(--modal-bg)",
@@ -19,32 +22,5 @@ module.exports = {
       },
     },
   },
-  plugins: [
-    function ({ addUtilities }) {
-      addUtilities(
-        {
-          ".remove-icon": {
-            "::-webkit-calendar-picker-indicator": {
-              display: "none",
-            },
-          },
-        },
-        ["responsive", "hover"]
-      );
-    },
-  ],
-  plugins: [
-    function ({ addUtilities }) {
-      addUtilities(
-        {
-          ".remove-icon": {
-            "::-webkit-calendar-picker-indicator": {
-              display: "none",
-            },
-          },
-        },
-        ["responsive", "hover"]
-      );
-    },
-  ],
+  plugins: [],
 };
