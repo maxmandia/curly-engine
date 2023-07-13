@@ -2,7 +2,7 @@ import React from "react";
 import Navbar from "./components/Navbar";
 function App() {
   return (
-    <div className="bg-[#2A2E38] h-screen text-white">
+    <div className="bg-[#2A2E38] h-screen text-white font-circular">
       <Navbar />
       <h1>Admin User Tool</h1>
       <p>

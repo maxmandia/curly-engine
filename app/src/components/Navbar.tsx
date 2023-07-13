@@ -3,12 +3,12 @@ import PrimaryButton from "./PrimaryButton";
 function Navbar() {
   return (
     <nav className="py-3 px-8">
-      <h2 className="text-[18px] py-5">User Roster</h2>
+      <h2 className="text-[18px] py-5 font-bold">User Roster</h2>
       <div className="flex items-center gap-5">
-        <PrimaryButton text="Add New Users" />
+        <PrimaryButton text="Add New User" />
         <div className="flex items-center gap-2">
           <h5>Sort By:</h5>
-          <button className="text-ritten-blue">
+          <button className="text-ritten-blue ">
             Date of Birth (Ascending)
           </button>
         </div>
