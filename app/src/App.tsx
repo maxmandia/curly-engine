@@ -1,9 +1,8 @@
 import React from "react";
-import "./App.css";
 
 function App() {
   return (
-    <div className="app">
+    <div>
       <h1>Admin User Tool</h1>
       <p>
         Follow the instructions in the README file to complete the project. Good
