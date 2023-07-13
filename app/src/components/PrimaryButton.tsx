@@ -2,17 +2,25 @@ import React from "react";
 
 interface PrimaryButtonProps {
   text: string;
+  setShowModal: (showModal: boolean) => void;
 }
 
 function PrimaryButton(props: PrimaryButtonProps) {
-  const { text } = props;
+  const { text, setShowModal } = props;
+
+  function handleClick() {
+    setShowModal(true);
+  }
 
   if (!text) {
     return null;
   }
 
   return (
-    <button className="bg-ritten-blue text-black py-[6px] px-[20px] rounded-[6px]">
+    <button
+      onClick={handleClick}
+      className="bg-ritten-blue text-black py-[6px] px-[20px] rounded-[6px]"
+    >
       Add New User
     </button>
   );
