@@ -1,7 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { ReactComponent as FormClose } from "../assets/form-close.svg";
-import deleteUser from "../database/delete-user";
+import deleteUser from "../api/delete-user";
 import UserInterface from "../interfaces/UserInterface";
 import toast from "react-hot-toast";
 

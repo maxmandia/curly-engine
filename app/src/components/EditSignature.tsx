@@ -1,5 +1,7 @@
 import React from "react";
 import UserInterface from "../interfaces/UserInterface";
+import addSignature from "../api/add-signature";
+import toast from "react-hot-toast";
 
 interface EditSignatureProps {
   setIsEditing: React.Dispatch<React.SetStateAction<boolean>>;
@@ -10,20 +12,47 @@ function EditSignature(props: EditSignatureProps) {
   const { setIsEditing, selectedUser } = props;
   const [selectedFont, setSelectedFont] =
     React.useState<string>("Cedarville Cursive");
-  const [userPin, setUserPin] = React.useState<number>();
+  const [userPin, setUserPin] = React.useState<string>("");
 
   function handlePinChange(e: React.ChangeEvent<HTMLInputElement>) {
     const value = e.target.value;
-    // Ensure that the input is numeric and is not longer than 6 characters
-    if (!isNaN(parseInt(value)) && value.length <= 6) {
-      setUserPin(parseInt(value));
-    } else if (value === "") {
-      setUserPin(undefined);
+    if (value.length <= 6) {
+      setUserPin(value);
     }
   }
 
-  function handleSave() {
-    console.log(userPin);
+  async function handleSave() {
+    if (!userPin) {
+      toast.error("Please enter a valid PIN");
+      return;
+    }
+
+    if (userPin.length < 6) {
+      toast.error("PIN must be 6 digits");
+      return;
+    }
+
+    let signature = {
+      pin: userPin,
+      fontStyle: selectedFont,
+    };
+    try {
+      let resp = await addSignature(
+        signature,
+        selectedUser.id,
+        selectedUser.dob
+      );
+      toast.success("Signature added successfully");
+    } catch (error: any) {
+      if (error.message === "Incorrect fields") {
+        toast.error("Incorrect fields");
+        return;
+      } else if (error.message === "dob conflict") {
+        toast.error("Cannot use DOB as PIN");
+      } else {
+        console.log(error);
+      }
+    }
   }
 
   if (!selectedUser) {
@@ -38,6 +67,7 @@ function EditSignature(props: EditSignatureProps) {
           Signature PIN (6 Digits)
         </label>
         <input
+          placeholder="Signature PIN"
           value={userPin}
           onChange={handlePinChange}
           className="bg-[#0A0C13] p-1 border-solid border-[#50535E] border-[1px] rounded-[4px] my-3 text-[#D1D4DC]"
@@ -47,6 +77,7 @@ function EditSignature(props: EditSignatureProps) {
           Signature Font Style
         </label>
         <select
+          placeholder="Cedarville Cursive"
           className="bg-[#0A0C13] p-1 border-solid border-[#50535E] border-[1px] rounded-[4px] my-3 text-[#D1D4DC]"
           name="font"
           id=""
