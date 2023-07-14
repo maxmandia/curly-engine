@@ -31,7 +31,11 @@ function App() {
       <Toaster />
       <AnimatePresence mode="wait">
         {showModal && (
-          <AddUserModal setUsers={setUsers} setShowModal={setShowModal} />
+          <AddUserModal
+            users={users}
+            setUsers={setUsers}
+            setShowModal={setShowModal}
+          />
         )}
       </AnimatePresence>
       <Navbar setShowModal={setShowModal} />

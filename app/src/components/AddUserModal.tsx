@@ -1,6 +1,7 @@
 import React, { useRef } from "react";
 import { motion } from "framer-motion";
 import { ReactComponent as Formclose } from "../assets/form-close.svg";
+import addUser from "../database/add-user";
 import UserInterface from "../interfaces/UserInterface";
 import toast from "react-hot-toast";
 
@@ -44,34 +45,32 @@ const modal = {
 interface AddUserModalProps {
   setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
   setUsers: React.Dispatch<React.SetStateAction<UserInterface[]>>;
+  users: UserInterface[];
 }
 
 function AddUserModal(props: AddUserModalProps) {
-  const { setShowModal, setUsers } = props;
+  const { setShowModal, setUsers, users } = props;
   const nameRef = useRef<HTMLInputElement>(null);
   const dobRef = useRef<HTMLInputElement>(null);
   const phoneRef = useRef<HTMLInputElement>(null);
   const emailRef = useRef<HTMLInputElement>(null);
 
-  function addUser() {
-    if (
-      nameRef.current?.value !== "" &&
-      dobRef.current?.value !== "" &&
-      phoneRef.current?.value !== "" &&
-      emailRef.current?.value !== ""
-    ) {
-      // if a user uses dashes in dob, remove and replace
-      const date = new Date(dobRef.current!.value);
-      const formattedDate = `${
-        date.getMonth() + 1
-      }/${date.getDate()}/${date.getFullYear()}`;
-
+  async function handleNewUser() {
+    try {
+      let resp: UserInterface = await addUser({
+        id: users.length + 1,
+        name: nameRef.current!.value,
+        dob: dobRef.current!.value,
+        phone: phoneRef.current!.value,
+        email: emailRef.current!.value,
+        signature: null,
+      });
       setUsers((prevUsers: UserInterface[]) => [
         ...prevUsers,
         {
           id: prevUsers.length + 1,
           name: nameRef.current!.value,
-          dob: formattedDate,
+          dob: resp.dob,
           phone: phoneRef.current!.value,
           email: emailRef.current!.value,
           signature: null,
@@ -79,8 +78,14 @@ function AddUserModal(props: AddUserModalProps) {
       ]);
       setShowModal(false);
       toast.success("User added!");
-    } else {
-      toast.error("Please fill out all fields.");
+    } catch (error: any) {
+      if (error.message === "missing fields") {
+        toast.error("Please fill out all fields.");
+        return;
+      } else {
+        toast.error("Something went wrong.");
+        return;
+      }
     }
   }
 
@@ -155,7 +160,7 @@ function AddUserModal(props: AddUserModalProps) {
             Cancel
           </button>
           <button
-            onClick={addUser}
+            onClick={handleNewUser}
             className="bg-ritten-blue py-2 px-5 rounded-[6px] text-black shadow-user-shadow"
           >
             Add User
