@@ -2,6 +2,8 @@ import React from "react";
 import { motion } from "framer-motion";
 import UserInterface from "../interfaces/UserInterface";
 import UserInfo from "./UserInfo";
+import UserSignature from "./UserSignature";
+import EditSignature from "./EditSignature";
 
 const sheet = {
   hidden: { x: "100vh", opacity: 0 },
@@ -34,6 +36,7 @@ interface UserSheetProps {
 
 function UserSheet(props: UserSheetProps) {
   const { selectedUser, setSelectedUser, setShowDeleteModal } = props;
+  const [isEditing, setIsEditing] = React.useState<boolean>(false);
 
   return (
     <motion.div
@@ -41,13 +44,21 @@ function UserSheet(props: UserSheetProps) {
       animate="visible"
       exit="hidden"
       variants={sheet}
-      className="bg-[#121623] w-1/2 rounded-[8px]"
+      className="bg-[#121623] w-1/2 rounded-[8px] h-[75vh] overflow-y-auto]"
     >
       <UserInfo
         setShowDeleteModal={setShowDeleteModal}
         setSelectedUser={setSelectedUser}
         selectedUser={selectedUser}
       />
+      {isEditing ? (
+        <EditSignature />
+      ) : (
+        <UserSignature
+          setIsEditing={setIsEditing}
+          selectedUser={selectedUser}
+        />
+      )}
     </motion.div>
   );
 }
