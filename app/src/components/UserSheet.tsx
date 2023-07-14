@@ -32,10 +32,11 @@ interface UserSheetProps {
   selectedUser: UserInterface;
   setSelectedUser: React.Dispatch<React.SetStateAction<UserInterface | null>>;
   setShowDeleteModal: React.Dispatch<React.SetStateAction<boolean>>;
+  setUsers: React.Dispatch<React.SetStateAction<UserInterface[]>>;
 }
 
 function UserSheet(props: UserSheetProps) {
-  const { selectedUser, setSelectedUser, setShowDeleteModal } = props;
+  const { selectedUser, setSelectedUser, setShowDeleteModal, setUsers } = props;
   const [isEditing, setIsEditing] = React.useState<boolean>(false);
 
   return (
@@ -53,6 +54,7 @@ function UserSheet(props: UserSheetProps) {
       />
       {isEditing ? (
         <EditSignature
+          setUsers={setUsers}
           selectedUser={selectedUser}
           setIsEditing={setIsEditing}
         />

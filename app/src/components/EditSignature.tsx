@@ -6,10 +6,11 @@ import toast from "react-hot-toast";
 interface EditSignatureProps {
   setIsEditing: React.Dispatch<React.SetStateAction<boolean>>;
   selectedUser: UserInterface;
+  setUsers: React.Dispatch<React.SetStateAction<UserInterface[]>>;
 }
 
 function EditSignature(props: EditSignatureProps) {
-  const { setIsEditing, selectedUser } = props;
+  const { setIsEditing, selectedUser, setUsers } = props;
   const [selectedFont, setSelectedFont] =
     React.useState<string>("Cedarville Cursive");
   const [userPin, setUserPin] = React.useState<string>("");
@@ -36,12 +37,21 @@ function EditSignature(props: EditSignatureProps) {
       pin: userPin,
       fontStyle: selectedFont,
     };
+
     try {
       let resp = await addSignature(
         signature,
         selectedUser.id,
         selectedUser.dob
       );
+      setUsers((prev) => {
+        return prev.map((user) => {
+          if (user.id === selectedUser.id) {
+            return { ...user, signature: resp };
+          }
+          return user;
+        });
+      });
       toast.success("Signature added successfully");
     } catch (error: any) {
       if (error.message === "Incorrect fields") {
