@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+/* used for the user's signature */
+@import url("https://fonts.googleapis.com/css2?family=Cedarville+Cursive&family=Great+Vibes&family=Tangerine&display=swap");
+
 @font-face {
   font-family: "Circular";
   src: url("../public/fonts/CircularStd-Book.otf") format("opentype");

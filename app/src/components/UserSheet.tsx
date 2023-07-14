@@ -52,7 +52,10 @@ function UserSheet(props: UserSheetProps) {
         selectedUser={selectedUser}
       />
       {isEditing ? (
-        <EditSignature setIsEditing={setIsEditing} />
+        <EditSignature
+          selectedUser={selectedUser}
+          setIsEditing={setIsEditing}
+        />
       ) : (
         <UserSignature
           setIsEditing={setIsEditing}
