@@ -56,8 +56,8 @@ function App() {
       <div
         className={
           selectedUser
-            ? "flex justify-between mt-5 mx-8"
-            : "block mt-5 mx-8 gap-10"
+            ? "flex justify-between mt-3 mx-8"
+            : "block mt-3 mx-8 gap-10"
         }
       >
         <div className="min-w-[48%]">

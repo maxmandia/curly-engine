@@ -37,7 +37,7 @@ function UserInfo(props: UserInfoProps) {
           </button>
         </div>
       </div>
-      <div className="flex items-center gap-3 mt-1">
+      <div className="flex items-center gap-3 mt-1 text-[14px]">
         <h5>
           <span className="font-bold">DOB: </span>
           {selectedUser.dob}
