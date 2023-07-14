@@ -10,7 +10,7 @@ import UserSheet from "./components/UserSheet";
 function App() {
   const [users, setUsers] = useState<UserInterface[]>([]);
   const [showModal, setShowModal] = useState(false);
-  const [showSheet, setShowSheet] = useState(false);
+  const [selectedUser, setSelectedUser] = useState<UserInterface | null>(null);
 
   async function fetchUsers() {
     try {
@@ -37,20 +37,26 @@ function App() {
       <Navbar setShowModal={setShowModal} />
       <div
         className={
-          showSheet
+          selectedUser
             ? "flex justify-between mt-5 mx-8"
             : "block mt-5 mx-8 gap-10"
         }
       >
         <div className="min-w-[48%]">
-          {users &&
-            users.map((user) => (
-              <UserCard setShowSheet={setShowSheet} key={user.id} user={user} />
-            ))}
+          {users.map((user) => (
+            <UserCard
+              setSelectedUser={setSelectedUser}
+              key={user.id}
+              user={user}
+            />
+          ))}
         </div>
-        {showSheet && (
-          <AnimatePresence mode="popLayout">
-            <UserSheet />
+        {selectedUser && (
+          <AnimatePresence mode="wait">
+            <UserSheet
+              setSelectedUser={setSelectedUser}
+              selectedUser={selectedUser}
+            />
           </AnimatePresence>
         )}
       </div>

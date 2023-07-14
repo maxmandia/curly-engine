@@ -1,5 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
+import UserInterface from "../interfaces/UserInterface";
+import UserInfo from "./UserInfo";
 
 const sheet = {
   hidden: { x: "100vh", opacity: 0 },
@@ -24,16 +26,23 @@ const sheet = {
   },
 };
 
-function UserSheet() {
+interface UserSheetProps {
+  selectedUser: UserInterface;
+  setSelectedUser: React.Dispatch<React.SetStateAction<UserInterface | null>>;
+}
+
+function UserSheet(props: UserSheetProps) {
+  const { selectedUser, setSelectedUser } = props;
+
   return (
     <motion.div
       initial="hidden"
       animate="visible"
       exit="hidden"
       variants={sheet}
-      className="bg-[#121623] w-1/2 rounded-[8px]"
+      className="bg-[#121623] w-1/2 rounded-[8px] p-5"
     >
-      UserSheet
+      <UserInfo setSelectedUser={setSelectedUser} selectedUser={selectedUser} />
     </motion.div>
   );
 }

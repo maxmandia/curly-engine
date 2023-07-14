@@ -4,11 +4,11 @@ import UserInterface from "../interfaces/UserInterface";
 
 interface UserCardProps {
   user: UserInterface;
-  setShowSheet: React.Dispatch<React.SetStateAction<boolean>>;
+  setSelectedUser: React.Dispatch<React.SetStateAction<UserInterface | null>>;
 }
 
 function UserCard(props: UserCardProps) {
-  const { user, setShowSheet } = props;
+  const { user, setSelectedUser } = props;
 
   if (!user) {
     return null;
@@ -16,7 +16,14 @@ function UserCard(props: UserCardProps) {
 
   return (
     <div
-      onClick={() => setShowSheet((prev) => !prev)}
+      onClick={() =>
+        setSelectedUser((prev) => {
+          if (prev?.id === user.id) {
+            return null;
+          }
+          return user;
+        })
+      }
       className="flex items-center justify-between bg-[#121623] p-4 mb-5 rounded-[8px] cursor-pointer"
     >
       <div>
