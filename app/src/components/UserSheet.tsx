@@ -29,10 +29,11 @@ const sheet = {
 interface UserSheetProps {
   selectedUser: UserInterface;
   setSelectedUser: React.Dispatch<React.SetStateAction<UserInterface | null>>;
+  setShowDeleteModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 function UserSheet(props: UserSheetProps) {
-  const { selectedUser, setSelectedUser } = props;
+  const { selectedUser, setSelectedUser, setShowDeleteModal } = props;
 
   return (
     <motion.div
@@ -40,9 +41,13 @@ function UserSheet(props: UserSheetProps) {
       animate="visible"
       exit="hidden"
       variants={sheet}
-      className="bg-[#121623] w-1/2 rounded-[8px] p-5"
+      className="bg-[#121623] w-1/2 rounded-[8px]"
     >
-      <UserInfo setSelectedUser={setSelectedUser} selectedUser={selectedUser} />
+      <UserInfo
+        setShowDeleteModal={setShowDeleteModal}
+        setSelectedUser={setSelectedUser}
+        selectedUser={selectedUser}
+      />
     </motion.div>
   );
 }

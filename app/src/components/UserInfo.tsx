@@ -7,21 +7,22 @@ import { ReactComponent as Close } from "../assets/form-close.svg";
 interface UserInfoProps {
   selectedUser: UserInterface;
   setSelectedUser: React.Dispatch<React.SetStateAction<UserInterface | null>>;
+  setShowDeleteModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 function UserInfo(props: UserInfoProps) {
-  const { selectedUser, setSelectedUser } = props;
+  const { selectedUser, setSelectedUser, setShowDeleteModal } = props;
 
   if (!selectedUser) {
     return null;
   }
 
   return (
-    <div>
+    <div className="border-solid border-b-[2px] border-[#333333] p-5">
       <div className="flex items-center justify-between">
         <h3 className="text-[20px]">{selectedUser.name}</h3>
         <div className="flex items-center gap-3">
-          <button className="mr-2">
+          <button onClick={() => setShowDeleteModal(true)} className="mr-2">
             <Trash height={20} width={20} />
           </button>
           <button>

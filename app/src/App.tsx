@@ -6,11 +6,13 @@ import AddUserModal from "./components/AddUserModal";
 import { AnimatePresence } from "framer-motion";
 import { Toaster } from "react-hot-toast";
 import UserSheet from "./components/UserSheet";
+import DeleteUserModal from "./components/DeleteUserModal";
 
 function App() {
   const [users, setUsers] = useState<UserInterface[]>([]);
   const [showModal, setShowModal] = useState(false);
   const [selectedUser, setSelectedUser] = useState<UserInterface | null>(null);
+  const [showDeleteModal, setShowDeleteModal] = useState<Boolean>(false);
 
   async function fetchUsers() {
     try {
@@ -37,6 +39,18 @@ function App() {
             setShowModal={setShowModal}
           />
         )}
+        {showDeleteModal && (
+          <DeleteUserModal
+            setShowDeleteModal={
+              setShowDeleteModal as React.Dispatch<
+                React.SetStateAction<boolean>
+              >
+            }
+            selectedUser={selectedUser}
+            setUsers={setUsers}
+            setSelectedUser={setSelectedUser}
+          />
+        )}
       </AnimatePresence>
       <Navbar setShowModal={setShowModal} />
       <div
@@ -58,6 +72,11 @@ function App() {
         {selectedUser && (
           <AnimatePresence mode="wait">
             <UserSheet
+              setShowDeleteModal={
+                setShowDeleteModal as React.Dispatch<
+                  React.SetStateAction<boolean>
+                >
+              }
               setSelectedUser={setSelectedUser}
               selectedUser={selectedUser}
             />
