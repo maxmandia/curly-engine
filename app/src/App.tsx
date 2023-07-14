@@ -5,10 +5,12 @@ import UserInterface from "./interfaces/UserInterface";
 import AddUserModal from "./components/AddUserModal";
 import { AnimatePresence } from "framer-motion";
 import { Toaster } from "react-hot-toast";
+import UserSheet from "./components/UserSheet";
 
 function App() {
   const [users, setUsers] = useState<UserInterface[]>([]);
   const [showModal, setShowModal] = useState(false);
+  const [showSheet, setShowSheet] = useState(false);
 
   async function fetchUsers() {
     try {
@@ -33,9 +35,25 @@ function App() {
         )}
       </AnimatePresence>
       <Navbar setShowModal={setShowModal} />
-      {users
-        ? users.map((user) => <UserCard key={user.id} user={user} />)
-        : null}
+      <div
+        className={
+          showSheet
+            ? "flex justify-between mt-5 mx-8"
+            : "block mt-5 mx-8 gap-10"
+        }
+      >
+        <div className="min-w-[48%]">
+          {users &&
+            users.map((user) => (
+              <UserCard setShowSheet={setShowSheet} key={user.id} user={user} />
+            ))}
+        </div>
+        {showSheet && (
+          <AnimatePresence mode="popLayout">
+            <UserSheet />
+          </AnimatePresence>
+        )}
+      </div>
     </div>
   );
 }
