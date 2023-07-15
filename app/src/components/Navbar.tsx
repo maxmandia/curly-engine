@@ -9,7 +9,7 @@ function Navbar(props: NavbarProps) {
   const { setShowModal } = props;
 
   return (
-    <nav className="py-3 px-8">
+    <nav className="py-1 px-8">
       <h2 className="text-[18px] py-5 font-bold">User Roster</h2>
       <div className="flex items-center gap-5">
         <PrimaryButton setShowModal={setShowModal} text="Add New User" />

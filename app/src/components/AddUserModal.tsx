@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import { motion } from "framer-motion";
 import { ReactComponent as Formclose } from "../assets/form-close.svg";
-import addUser from "../database/add-user";
+import addUser from "../api/add-user";
 import UserInterface from "../interfaces/UserInterface";
 import toast from "react-hot-toast";
 

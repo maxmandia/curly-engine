@@ -24,9 +24,24 @@ function App() {
     }
   }
 
+  // fetch users on mount
   useEffect(() => {
     fetchUsers();
   }, []);
+
+  /*
+    When we update a user's signature, we need to update that user in the users array.
+    This effect will run when the users array changes, and will update the selectedUser
+    to ensure that the user sheet is updated with the new signature.
+  */
+  useEffect(() => {
+    if (users && selectedUser) {
+      const user = users.find((user) => user.id === selectedUser.id);
+      if (user) {
+        setSelectedUser(user);
+      }
+    }
+  }, [users]);
 
   return (
     <div className="h-screen text-white font-circular">
@@ -56,8 +71,8 @@ function App() {
       <div
         className={
           selectedUser
-            ? "flex justify-between mt-5 mx-8"
-            : "block mt-5 mx-8 gap-10"
+            ? "flex justify-between mt-3 mx-8"
+            : "block mt-3 mx-8 gap-10"
         }
       >
         <div className="min-w-[48%]">
@@ -72,6 +87,7 @@ function App() {
         {selectedUser && (
           <AnimatePresence mode="wait">
             <UserSheet
+              setUsers={setUsers}
               setShowDeleteModal={
                 setShowDeleteModal as React.Dispatch<
                   React.SetStateAction<boolean>
