@@ -4,6 +4,7 @@ import { ReactComponent as Formclose } from "../assets/form-close.svg";
 import addUser from "../api/add-user";
 import UserInterface from "../interfaces/UserInterface";
 import toast from "react-hot-toast";
+import UserForm from "./UserForm";
 
 /*
     NOTE: 
@@ -98,7 +99,7 @@ function AddUserModal(props: AddUserModalProps) {
       exit="hidden"
     >
       <motion.div
-        className="bg-[#121623] flex flex-col justify-between gap-3 p-10 rounded-[6px]"
+        className="bg-[#121623] flex flex-col justify-between gap-3 p-10 min-w-[450px] rounded-[6px]"
         variants={modal}
       >
         <div className="flex items-center justify-between">
@@ -110,48 +111,12 @@ function AddUserModal(props: AddUserModalProps) {
             <Formclose />
           </button>
         </div>
-        <form action="post" className="flex flex-col gap-2">
-          <label className="text-[14px] text-[#D1D4DC]" htmlFor="name">
-            Name
-          </label>
-          <input
-            ref={nameRef}
-            className="text-[#D1D4DC] pl-2 bg-[#0A0C13] rounded-[4px] w-[350px] py-1 border-solid border-[#50535E] border-[1px]"
-            type="text"
-            name="name"
-            placeholder="Name"
-          ></input>
-          <label className="text-[14px] text-[#D1D4DC]" htmlFor="dob">
-            Date of Birth
-          </label>
-          <input
-            ref={dobRef}
-            className="text-[#D1D4DC] pl-2 bg-[#0A0C13] rounded-[4px] w-[350px] py-1 border-solid border-[#50535E] border-[1px]"
-            type="text"
-            name="dob"
-            placeholder="Date of Birth"
-          ></input>
-          <label className="text-[14px] text-[#D1D4DC]" htmlFor="phone">
-            Phone
-          </label>
-          <input
-            ref={phoneRef}
-            className="text-[#D1D4DC] pl-2 bg-[#0A0C13] rounded-[4px] w-[350px] py-1 border-solid border-[#50535E] border-[1px]"
-            type="tel"
-            name="phone"
-            placeholder="Phone"
-          ></input>
-          <label className="text-[14px] text-[#D1D4DC]" htmlFor="email">
-            Email
-          </label>
-          <input
-            ref={emailRef}
-            className="text-[#D1D4DC] pl-2 bg-[#0A0C13] rounded-[4px] w-[350px] py-1 border-solid border-[#50535E] border-[1px]"
-            type="email"
-            name="email"
-            placeholder="Email"
-          ></input>
-        </form>
+        <UserForm
+          nameRef={nameRef}
+          dobRef={dobRef}
+          phoneRef={phoneRef}
+          emailRef={emailRef}
+        />
         <div className="flex items-center justify-end gap-5 pt-2">
           <button
             onClick={() => setShowModal(false)}

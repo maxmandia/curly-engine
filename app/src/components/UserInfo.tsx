@@ -8,10 +8,16 @@ interface UserInfoProps {
   selectedUser: UserInterface;
   setSelectedUser: React.Dispatch<React.SetStateAction<UserInterface | null>>;
   setShowDeleteModal: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsEditingUser: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 function UserInfo(props: UserInfoProps) {
-  const { selectedUser, setSelectedUser, setShowDeleteModal } = props;
+  const {
+    selectedUser,
+    setSelectedUser,
+    setShowDeleteModal,
+    setIsEditingUser,
+  } = props;
 
   if (!selectedUser) {
     return null;
@@ -25,7 +31,7 @@ function UserInfo(props: UserInfoProps) {
           <button onClick={() => setShowDeleteModal(true)} className="mr-2">
             <Trash height={20} width={20} />
           </button>
-          <button>
+          <button onClick={() => setIsEditingUser(true)}>
             <Edit height={20} width={20} />
           </button>
           <button
