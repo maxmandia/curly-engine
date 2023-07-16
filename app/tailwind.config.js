@@ -9,6 +9,9 @@ module.exports = {
       boxShadow: {
         "user-shadow": "0px 1px 8px 0px rgba(213, 213, 213, 0.50)",
       },
+      screens: {
+        sm: { max: "725px" },
+      },
       colors: {
         "ritten-blue": "var(--ritten-blue)",
         "modal-bg": "var(--modal-bg)",

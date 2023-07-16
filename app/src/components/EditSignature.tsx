@@ -47,11 +47,13 @@ function EditSignature(props: EditSignatureProps) {
       setUsers((prev) => {
         return prev.map((user) => {
           if (user.id === selectedUser.id) {
-            return { ...user, signature: resp };
+            let newUserInfo = { ...user, signature: resp.signature };
+            return newUserInfo;
           }
           return user;
         });
       });
+      setIsEditing(false);
       toast.success("Signature added successfully");
     } catch (error: any) {
       if (error.message === "Incorrect fields") {

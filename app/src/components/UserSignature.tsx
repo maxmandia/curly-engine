@@ -33,7 +33,7 @@ function UserSignature(props: UserSignatureProps) {
         onClick={() => {
           setIsEditing(true);
         }}
-        className="bg-ritten-blue py-2 px-4 rounded-[6px] text-black"
+        className="bg-ritten-blue py-2 px-4 rounded-[6px] text-black sm:text-[14px]"
       >
         {selectedUser.signature ? "View Signature" : "Add Signature"}
       </button>

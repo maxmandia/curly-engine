@@ -47,7 +47,7 @@ function UserSheet(props: UserSheetProps) {
       animate="visible"
       exit="hidden"
       variants={sheet}
-      className="bg-[#121623] w-1/2 rounded-[8px] h-[80vh] overflow-y-auto]"
+      className="bg-[#121623] w-1/2 rounded-[8px] h-[80vh] overflow-y-auto] sm:w-full"
     >
       {isEditingUser ? (
         <EditUser

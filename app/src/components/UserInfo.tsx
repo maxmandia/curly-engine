@@ -44,15 +44,15 @@ function UserInfo(props: UserInfoProps) {
         </div>
       </div>
       <div className="flex items-center gap-3 mt-1 text-[14px]">
-        <h5>
+        <h5 className="sm:text-[12px]">
           <span className="font-bold">DOB: </span>
           {selectedUser.dob}
         </h5>
-        <h5>
+        <h5 className="sm:text-[12px]">
           <span className="font-bold">Phone: </span>
           {selectedUser.phone}
         </h5>
-        <h5>
+        <h5 className="sm:text-[12px]">
           <span className="font-bold">Email: </span>
           {selectedUser.email}
         </h5>

@@ -71,7 +71,7 @@ function App() {
       <div
         className={
           selectedUser
-            ? "flex justify-between mt-3 mx-8"
+            ? "flex justify-between mt-3 mx-8 sm:flex sm:flex-col"
             : "block mt-3 mx-8 gap-10"
         }
       >

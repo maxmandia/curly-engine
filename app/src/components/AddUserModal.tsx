@@ -99,7 +99,7 @@ function AddUserModal(props: AddUserModalProps) {
       exit="hidden"
     >
       <motion.div
-        className="bg-[#121623] flex flex-col justify-between gap-3 p-10 min-w-[450px] rounded-[6px]"
+        className="bg-[#121623] flex flex-col justify-between gap-3 p-10 min-w-[450px] rounded-[6px] sm:min-w-[350px]"
         variants={modal}
       >
         <div className="flex items-center justify-between">

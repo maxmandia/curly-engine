@@ -13,7 +13,7 @@ function Navbar(props: NavbarProps) {
   const [showSort, setShowSort] = useState(false);
   const [showFilter, setShowFilter] = useState(false);
   const [filterBy, setFilterBy] = useState("All-Users");
-  const [sortBy, setSortBy] = useState("Ascending");
+  const [sortBy, setSortBy] = useState("");
 
   function handleSort(sortType: string) {
     setUsers((prevUsers) => {
@@ -79,8 +79,10 @@ function Navbar(props: NavbarProps) {
   return (
     <nav className="py-1 px-8">
       <h2 className="text-[18px] py-5 font-bold">User Roster</h2>
-      <div className="flex items-center gap-5">
-        <PrimaryButton setShowModal={setShowModal} text="Add New User" />
+      <div className="flex items-center gap-5 sm:gap-1 sm:flex-wrap">
+        <div className="sm:mb-1">
+          <PrimaryButton setShowModal={setShowModal} text="Add New User" />
+        </div>
         <div className="flex items-center gap-2">
           <h5>Sort By:</h5>
           <div>
@@ -93,7 +95,9 @@ function Navbar(props: NavbarProps) {
               }}
               className="text-ritten-blue "
             >
-              Date of Birth ({sortBy})
+              {sortBy === ""
+                ? "Date of Birth (Ascending)"
+                : `Date of Birth (${sortBy})`}
             </button>
             {showSort && (
               <div className="absolute flex flex-col justify-center items-start bg-[#121623] shadow-md rounded-md border-solid border-[#363A45] border-[1px]">
