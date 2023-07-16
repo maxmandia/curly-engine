@@ -1,14 +1,17 @@
 import React from "react";
 import { ReactComponent as Formclose } from "../assets/panel-left-close.svg";
+import { ReactComponent as Formopen } from "../assets/panel-left-open.svg";
+
 import UserInterface from "../interfaces/UserInterface";
 
 interface UserCardProps {
   user: UserInterface;
   setSelectedUser: React.Dispatch<React.SetStateAction<UserInterface | null>>;
+  selectedUser: UserInterface | null;
 }
 
 function UserCard(props: UserCardProps) {
-  const { user, setSelectedUser } = props;
+  const { user, setSelectedUser, selectedUser } = props;
 
   if (!user) {
     return null;
@@ -24,7 +27,10 @@ function UserCard(props: UserCardProps) {
           return user;
         })
       }
-      className="flex items-center justify-between bg-[#121623] p-4 mb-5 rounded-[8px] cursor-pointer"
+      className={`flex items-center justify-between bg-[#121623] p-4 mb-5 rounded-[8px] cursor-pointer ${
+        selectedUser?.id === user.id &&
+        "border-solid border-[#1890FF] border-[2px] shadow-user-shadow"
+      }`}
     >
       <div>
         <h4 className="text-[18px]">{user.name}</h4>
@@ -40,7 +46,7 @@ function UserCard(props: UserCardProps) {
         >
           {user.signature ? "Has Custom Signature" : "Missing Custom Signature"}
         </div>
-        <Formclose className="" />
+        {selectedUser?.id === user.id ? <Formopen /> : <Formclose />}
       </div>
     </div>
   );

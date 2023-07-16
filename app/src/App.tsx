@@ -78,6 +78,7 @@ function App() {
         <div className="min-w-[48%]">
           {users.map((user) => (
             <UserCard
+              selectedUser={selectedUser}
               setSelectedUser={setSelectedUser}
               key={user.id}
               user={user}
