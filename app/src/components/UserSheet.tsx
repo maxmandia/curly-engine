@@ -53,6 +53,7 @@ function UserSheet(props: UserSheetProps) {
         <EditUser
           setIsEditingUser={setIsEditingUser}
           selectedUser={selectedUser}
+          setUsers={setUsers}
         />
       ) : (
         <>
