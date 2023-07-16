@@ -91,7 +91,7 @@ function EditUser(props: EditUserProps) {
       />
       <div className="flex items-center justify-end gap-8 mt-5">
         <button
-          // onClick={() => setIsEditing(false)}
+          onClick={() => setIsEditingUser(false)}
           className="text-ritten-blue"
         >
           Cancel
