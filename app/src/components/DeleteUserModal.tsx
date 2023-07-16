@@ -89,9 +89,9 @@ function DeleteUserModal(props: DeleteUserModalProps) {
           </button>
           <button
             onClick={handleUserDelete}
-            className="bg-ritten-blue text-[#D1D4DC] px-4 py-2 rounded-[4px] shadow-user-shadow"
+            className="bg-ritten-blue text-black px-6 py-2 rounded-[4px] shadow-user-shadow"
           >
-            Delete
+            OK
           </button>
         </div>
       </motion.div>
