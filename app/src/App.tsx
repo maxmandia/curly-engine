@@ -7,6 +7,7 @@ import { AnimatePresence } from "framer-motion";
 import { Toaster } from "react-hot-toast";
 import UserSheet from "./components/UserSheet";
 import DeleteUserModal from "./components/DeleteUserModal";
+import getUsers from "./api/get-users";
 
 function App() {
   const [users, setUsers] = useState<UserInterface[]>([]);
@@ -16,9 +17,8 @@ function App() {
 
   async function fetchUsers() {
     try {
-      const response = await fetch("http://localhost:3001/users");
-      const data = await response.json();
-      setUsers(data);
+      let resp = await getUsers();
+      setUsers(resp);
     } catch (error) {
       console.log(error);
     }
@@ -67,7 +67,7 @@ function App() {
           />
         )}
       </AnimatePresence>
-      <Navbar setShowModal={setShowModal} />
+      <Navbar setUsers={setUsers} setShowModal={setShowModal} />
       <div
         className={
           selectedUser
