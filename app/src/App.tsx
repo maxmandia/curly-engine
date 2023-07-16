@@ -67,7 +67,7 @@ function App() {
           />
         )}
       </AnimatePresence>
-      <Navbar setShowModal={setShowModal} />
+      <Navbar setUsers={setUsers} setShowModal={setShowModal} />
       <div
         className={
           selectedUser
