@@ -104,7 +104,7 @@ function Navbar(props: NavbarProps) {
                 : `Date of Birth (${sortBy})`}
             </button>
             {showSort && (
-              <div className="absolute flex flex-col justify-center items-start bg-[#121623] shadow-md rounded-md border-solid border-[#363A45] border-[1px]">
+              <div className="z-50 absolute flex flex-col justify-center items-start bg-[#121623] shadow-md rounded-md border-solid border-[#363A45] border-[1px]">
                 <button
                   onClick={() => handleSort("Ascending")}
                   className={`hover:bg-slate-800 py-2 w-[225px] pl-3 text-left ${
@@ -140,7 +140,7 @@ function Navbar(props: NavbarProps) {
               {getButtonText()}
             </button>
             {showFilter && (
-              <div className="absolute flex flex-col justify-center items-start bg-[#121623] shadow-md rounded-md border-solid border-[#363A45] border-[1px]">
+              <div className="z-50 absolute flex flex-col justify-center items-start bg-[#121623] shadow-md rounded-md border-solid border-[#363A45] border-[1px]">
                 <button
                   onClick={() => handleFilter("All-Users")}
                   className={`hover:bg-slate-800 py-2 w-[300px] pl-3 text-left ${
