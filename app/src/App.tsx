@@ -41,6 +41,7 @@ function App() {
         setSelectedUser(user);
       }
     }
+    // eslint-disable-next-line
   }, [users]);
 
   return (
