@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import PrimaryButton from "./PrimaryButton";
 import UserInterface from "../interfaces/UserInterface";
 import getUsers from "../api/get-users";
 
@@ -81,7 +80,12 @@ function Navbar(props: NavbarProps) {
       <h2 className="text-[18px] py-5 font-bold">User Roster</h2>
       <div className="flex items-center gap-5 sm:gap-1 sm:flex-wrap">
         <div className="sm:mb-1">
-          <PrimaryButton setShowModal={setShowModal} text="Add New User" />
+          <button
+            onClick={() => setShowModal(true)}
+            className="bg-ritten-blue text-black py-[6px] px-[20px] rounded-[6px]"
+          >
+            Add New User
+          </button>
         </div>
         <div className="flex items-center gap-2">
           <h5>Sort By:</h5>
